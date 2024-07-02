@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+<head>
+    <title>RF Remote Steuerung</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <!-- <script src="../static/js/reqwest.min.js"></script> -->
+    <script src="static/js/jquery371min.js"></script>
+    <script src="/static/js/main-dist.js"></script>
+    <link rel="stylesheet" href="static/css/style-dist.css">
+    <link rel="stylesheet" href="static/css/normalize.css">
+</head>
+
+<body>
+    <main>
+        <div><!--  row -->
+            <div class="appCaption">
+                <div>WebRemote</div>
+            </div>
+            <div class="statusWrapper" id="statusText">
+                Loading.
+            </div>
+        </div>
+
+        <div><!--  row -->
+            <div class="caption">Capture Signal</div>
+            <div>
+                <form id="recordForm">
+                    <input type="text" id="recordName" placeholder="Record name" required>
+                    <button id="recordButton" type="submit">Capture</button>
+                </form>
+            </div>
+        </div>
+
+        <div><!--  row -->
+            <div class="caption">Play Signals</div>
+            <table id="dataTable">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Name</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="dataTableBody">
+                    <!-- Load content from record library -->
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3">
+                            <div class="recordInfo">Record file: <span id="recordInfoFileName" class="mono">-</span>
+                            </div>
+                            <div class="recordInfo">Free memory: <span id="recordInfoFreeMemory" class="mono">-</span>
+                            </div>
+                            <div class="recordInfo" id="reloadAll"><span>Reload data and config</span>
+                            </div>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+
+        </div>
+    </main>
+
+</body>
+
+</html>

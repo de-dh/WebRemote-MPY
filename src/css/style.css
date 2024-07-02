@@ -1,0 +1,146 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: hsl(0, 0%, 0%);
+  text-align: center;
+  font-size: 1rem;
+  font-family: sans-serif, Arial;
+}
+
+main {
+  width: calc(100vw - 0.5rem);
+  min-width: 300px;
+  max-width: 480px;
+  border: 1px solid hsl(0, 0%, 0%);
+  background-color: #ebebeb;
+  box-shadow: 5px 5px 20px #cccccc;
+}
+main > div:not(:last-child) {
+  margin-bottom: 1.5rem;
+  padding: 0.5rem 0.25rem;
+}
+main > div:first-child {
+  background-color: #bcbcbc;
+  padding: 1rem 0.25rem;
+  border-bottom: 1px solid hsl(0, 0%, 0%);
+}
+
+.caption {
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.appCaption {
+  margin-bottom: 0.75rem;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: center;
+}
+.appCaption div {
+  font-size: 2.25rem;
+  line-height: 2.25rem;
+}
+
+.statusWrapper {
+  font-size: 0.9rem;
+}
+
+button {
+  cursor: pointer;
+  padding: 0.25rem;
+}
+button ~ button {
+  margin-left: 0.25rem;
+}
+
+input {
+  background-color: #ebebeb;
+  border: 1px solid hsl(0, 0%, 0%);
+  padding: 0.25rem;
+}
+
+table {
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: collapse;
+}
+table thead th:nth-child(1) {
+  width: 40px;
+}
+table thead th:nth-child(3) {
+  width: 110px;
+}
+table tbody {
+  font-size: 0.9rem;
+}
+table tbody tr:first-child td {
+  padding-top: 0.25rem !important;
+}
+table tbody tr:last-child td {
+  padding-bottom: 0.75rem !important;
+}
+table tbody tr:hover {
+  background-color: #bcbcbc;
+}
+table tbody tr.new {
+  background-color: hsl(118, 64%, 38%);
+  animation-name: mark-new;
+  animation-duration: 10s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in;
+}
+table th,
+table td {
+  padding: 0.25rem 0;
+}
+table tfoot tr {
+  border-top: 1px solid hsl(0, 0%, 0%);
+  background-color: #bcbcbc;
+}
+table tfoot tr:first-child td {
+  padding-top: 0.25rem !important;
+}
+table tfoot td {
+  padding-top: 0.25rem;
+}
+
+.recordInfo {
+  font-size: 0.9rem;
+  margin-bottom: 0.25rem;
+}
+.recordInfo .mono {
+  font-family: "Courier New", Courier, monospace;
+  margin-left: 0.25rem;
+}
+.recordInfo .click {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+@keyframes mark-new {
+  0% {
+    background-color: hsl(118, 64%, 38%);
+    opacity: 0.01;
+  }
+  10% {
+    background-color: hsl(118, 64%, 38%);
+    opacity: 1;
+  }
+  75% {
+    background-color: hsl(118, 64%, 38%);
+    opacity: 1;
+  }
+  100% {
+    background-color: #ebebeb;
+    opacity: 1;
+  }
+}

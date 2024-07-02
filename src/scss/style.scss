@@ -1,0 +1,196 @@
+// Theme configuration
+@use 'sass:color';
+
+$spacer : 0.25rem;
+$text-primary: hsl(0, 0%, 0%);
+$bg-primary: color.scale(hsl(0, 0%, 0%), $lightness: 92%);
+$shadow-primary: color.scale(hsl(0, 0%, 0%), $lightness: 80%);
+
+$green: hsla(118, 64%, 38%);
+$red: hsla(0, 64%, 38%);
+$lightblue: hsl(207, 64%, 38%);
+
+$fs-small: 0.9rem;
+$fs-caption: 1.5rem;
+$fs-large: 2.25rem;
+
+$min-width: 300px;
+$max-width: 480px;
+// CSS
+
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    color: $text-primary;
+    text-align: center;
+    font-size: 1rem;
+    font-family: sans-serif, Arial;
+}
+
+main {
+    width: calc(100vw - 2 * $spacer);
+    min-width: $min-width;
+    max-width: $max-width;
+    border: 1px solid $text-primary;
+
+    background-color: $bg-primary;
+    box-shadow: 5px 5px 20px $shadow-primary;
+
+    >div:not(:last-child) {
+        // Rows
+        margin-bottom: 6 * $spacer;
+        padding: 2 * $spacer $spacer;
+    }
+
+    >div:first-child {
+        // First row
+        background-color: color.scale($bg-primary, $lightness: -20%);
+        padding: 4 * $spacer $spacer;
+        border-bottom: 1px solid $text-primary;
+    }
+
+
+}
+
+.caption {
+    font-size: $fs-caption;
+    margin-bottom: 3 * $spacer;
+}
+
+.appCaption {
+    margin-bottom: 3 * $spacer;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: center;
+
+    div {
+        font-size: $fs-large;
+        line-height: $fs-large;
+    }
+}
+
+.statusWrapper {
+    font-size: $fs-small;
+}
+
+button {
+    cursor: pointer;
+    padding: $spacer;
+
+    ~button {
+        margin-left: $spacer;
+    }
+}
+
+input {
+    background-color: $bg-primary;
+    border: 1px solid $text-primary;
+    padding: $spacer;
+}
+
+
+table {
+    table-layout: fixed;
+    width: 100%;
+    border-collapse: collapse;
+
+    thead th:nth-child(1) {
+        width: 40px;
+    }
+
+    thead th:nth-child(3) {
+        width: 110px;
+    }
+
+    tbody {
+        font-size: $fs-small;
+
+        tr:first-child td {
+            padding-top: $spacer !important;
+        }
+
+        tr:last-child td {
+            padding-bottom: 3 * $spacer !important;
+        }
+
+        tr:hover {
+            background-color: color.scale($bg-primary, $lightness: -20%);
+        }
+
+        tr.new {
+            background-color: $green;
+            animation-name: mark-new;
+            animation-duration: 10s;
+            animation-fill-mode: forwards;
+            animation-timing-function: ease-in;
+        }
+    }
+
+    th,
+    td {
+        padding: $spacer 0;
+    }
+
+    tfoot {
+        tr {
+            border-top: 1px solid $text-primary;
+            background-color: color.scale($bg-primary, $lightness: -20%);
+        }
+        tr:first-child td {
+            padding-top: $spacer !important;
+        }
+        td {
+            padding-top: $spacer;
+        }
+    }
+
+}
+
+.recordInfo {
+    font-size: $fs-small;
+    margin-bottom: $spacer;
+
+    .mono {
+        font-family: 'Courier New', Courier, monospace;
+        margin-left: $spacer;
+    }
+
+    .click {
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+}
+
+@keyframes mark-new {
+    0% {
+        background-color: $green;
+        opacity: 0.01;
+    }
+
+    10% {
+        background-color: $green;
+        opacity: 1;
+    }
+
+    75% {
+        background-color: $green;
+        opacity: 1;
+    }
+
+    100% {
+        background-color: $bg-primary;
+        opacity: 1;
+    }
+}
