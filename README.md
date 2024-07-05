@@ -1,6 +1,8 @@
 # WebRemote-MPY
 
 ## Motivation
+
+<img align="right"  src="doc/remote_power_plug.jpg" width="150" height="auto" />
 I use several remote controlled (RC) power plugs at home, since they make turning on lights
 and other devices easy. This is especially convenient when the power switches are in
 inaccessible places or far away. 
@@ -9,6 +11,7 @@ Although all RC power plugs operate at the 433 MHz band, the RC protocolls of di
 can be incompatible. Therefore, using RC power plugs from different brands requires multiple transmitters each specific for 
 their brand. To overcome this inconvenience, I developed a setup to operate various rc signals in a single web interface.
 
+<img align="right"  src="doc/remote_ignition_02.jpg" width="150" height="auto" />
 This programm (WebRemote) can record the signals of different handheld 433 MHz transmitters
 using on-off-keying protocoll (OOK) and makes them accessible via a single web interface. 
 This eliminates the need of multiple brand-specific remotes.
@@ -17,7 +20,7 @@ accessible for all devices (e. g. mobile phones, computers) in the local WiFi.
 
 ## Description
 
-<img align="right"  src="doc/WebInterface.png" width="200" height="auto" /> WebRemote can record the signals of different handheld 433 MHz transmitters and make them accessible via a simple web interface. This eliminates the need of multiple brand-specific remotes for similar 433 MHz devices in home automation. WebRemote can connect to the local WiFi which makes the web interface accessible for all devices (e. g. mobile phones, computers) in the local WiFi.
+<img align="right"  src="doc/web_interface.png" width="150" height="auto" /> WebRemote can record the signals of different handheld 433 MHz transmitters and make them accessible via a simple web interface. This eliminates the need of multiple brand-specific remotes for similar 433 MHz devices in home automation. WebRemote can connect to the local WiFi which makes the web interface accessible for all devices (e. g. mobile phones, computers) in the local WiFi.
 
 WebRemote uses minimal hardware setup comprised of a Raspberry Pi Pico W (RPI), a 433 MHz Transmitter (TX) and a 433 MHz Receiver (RX).
 
@@ -32,7 +35,9 @@ Components:
 - Breadboard and wires
 - 433 MHz Transmitter (WL102-341) + Antenna
 - 433 MHz Receiver (RX470C-V01) + Antenna
-<img align="right"  src="doc/minimal_setup.jpg" width="400" height="auto" />
+
+
+<img align="right"  src="doc/minimal_setup.jpg" width="200" height="auto" />
 The supplied antennas were soldered onto the Transmitter (short antenna) and Receiver (long antenna).
 A minimum setup consisting only of a RPI and a 433 MHz Transmitter and Receiver
 (detailed information provided below) was installed on a small breadboard.
@@ -53,6 +58,8 @@ RPI was connected to a computer via USB which provides the power supply.
 1. MicroPython V 1.23.0 firmware is installed on the Raspberry Pi Pico W.
 2. The programm files in the /dist folder are copied onto the RPI using Thonny
 3. Open the main programm (main.py) and customize the WiFi settings provided as global constants / variables in the config section of the programm:
+<img src="doc/shell_with_network_info.png" width="400" height="auto" />
+
 
 ```python
 """Config"""
@@ -71,3 +78,7 @@ WR_AP_SSID = 'WEBREMOTE' #SSID of the AP created in AP mode
 WR_AP_PASSWORD = 'micropython' #Password of the AP created in AP mode
 				 #Use at least eight characters
 ```
+
+## Mobile setup
+I soldered the aforementioned components onto a circuit board and added some additional components for easy operation.
+<img align="right" src="doc/mobile_setup.jpg" width="200" height="auto" />
