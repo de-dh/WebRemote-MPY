@@ -58,9 +58,6 @@ RPI was connected to a computer via USB which provides the power supply.
 1. MicroPython V 1.23.0 firmware is installed on the Raspberry Pi Pico W.
 2. The programm files in the /dist folder are copied onto the RPI using Thonny
 3. Open the main programm (main.py) and customize the WiFi settings provided as global constants / variables in the config section of the programm:
-<img src="doc/shell_with_network_info.png" width="400" height="auto" />
-
-
 ```python
 """Config"""
 WR_HEARTBEAT = True   #[True|False] Use onboard LED as heartbead
@@ -78,6 +75,12 @@ WR_AP_SSID = 'WEBREMOTE' #SSID of the AP created in AP mode
 WR_AP_PASSWORD = 'micropython' #Password of the AP created in AP mode
 				 #Use at least eight characters
 ```
+4. When WiFi connection was successfull the IP address of the web interface is printed in the console of Thonny.<img src="doc/shell_with_network_info.png" width="400" height="auto" /> 
+   - **STA mode**: The web interface can be accessed via browser by every device connected to the same WiFi network as WebRemote using it's IP address as URL.
+   - **AP mode**: The web interface can only be accessed by a device directly connected to the access point created by WebRemote. When a device has connected to the AP, the web interface can be accessed via browser using it's IP address as URL.
+
+
+
 
 ## Mobile setup
 <img align="right" src="doc/mobile_setup.jpg" width="250" height="auto" />
