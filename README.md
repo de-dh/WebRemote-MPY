@@ -80,5 +80,16 @@ WR_AP_PASSWORD = 'micropython' #Password of the AP created in AP mode
 ```
 
 ## Mobile setup
-I soldered the aforementioned components onto a circuit board and added some additional components for easy operation.
-<img align="right" src="doc/mobile_setup.jpg" width="200" height="auto" />
+<img align="right" src="doc/mobile_setup.jpg" width="250" height="auto" />
+
+I use this setup at home since it does not require a computer for operation after initial configuration. 
+When connected to USB power, all neccessary information are displayed on a display.
+
+I soldered the components listed in section *Setup* onto a circuit board and added some additional components.
+Most important, I added an **OLED display** which displays information on the network configuration.
+A **toggle switch** is used to select WiFi mode. It allows selection of either AP or STA mode.
+A **green LED** and a **red LED** were added to indicate active transmissions and transmission errors, respectively.
+A simple push-button acts as a **reset switch**.
+
+
+
