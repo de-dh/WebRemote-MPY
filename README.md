@@ -79,7 +79,9 @@ WR_AP_PASSWORD = 'micropython' #Password of the AP created in AP mode
    - **STA mode**: The web interface can be accessed via browser by every device connected to the same WiFi network as WebRemote using it's IP address as URL.
    - **AP mode**: The web interface can only be accessed by a device directly connected to the access point created by WebRemote. When a device has connected to the AP, the web interface can be accessed via browser using it's IP address as URL.
 
-
+## Usage
+The recorded data is stored in a file in JSON format. The name of the 
+The data file must not be empty. 
 
 
 ## Mobile setup
