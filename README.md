@@ -1,32 +1,57 @@
 # WebRemote-MPY
 
-## Motivation
-
+## Summary
 <img align="right"  src="doc/remote_power_plug.jpg" width="150" height="auto" />
-I use several remote controlled (RC) power plugs at home, since they make turning on lights
-and other devices easy. This is especially convenient when the power switches are in
-inaccessible places or far away. 
 
-Although all RC power plugs operate at the 433 MHz band, the RC protocolls of different brands of
-can be incompatible. Therefore, using RC power plugs from different brands requires multiple transmitters each specific for 
-their brand. To overcome this inconvenience, I developed a setup to operate various rc signals in a single web interface.
+**WebRemote provides a simple web interface for recording and transmitting 433 MHz signals** commonly used by **remote controlled power plugs** and other devices.
+WebRemote is based on a Raspberry Pi Pico W using a minimal hardware setup comprised of a 433 MHz Transmitter and a 433 MHz Receiver.
+The programm is written in micropython and it relies on Peter Hinch's [micropython_remote](https://github.com/peterhinch/micropython_remote) to operate the transmitter and the receiver.
 
-<img align="right"  src="doc/remote_ignition_02.jpg" width="150" height="auto" />
-This programm (WebRemote) can record the signals of different handheld 433 MHz transmitters
-using on-off-keying protocoll (OOK) and makes them accessible via a single web interface. 
-This eliminates the need of multiple brand-specific remotes.
-Furthermore, WebRemote can connect to the local WiFi which makes the web-interface
-accessible for all devices (e. g. mobile phones, computers) in the local WiFi.
+
+## Motivation
+<img align="right"  src="doc/web_interface.png" width="150" height="auto" />
+
+I use several remote controlled (RC) power plugs at home, since they make turning on lights and other devices easy. 
+I was searching for a convenient way to operate RC power plugs using a Raspberry Pi Pico W (RPI) for a home-automation project. 
+
+
+I discovered Peter Hinch's [micropython_remote](https://github.com/peterhinch/micropython_remote) which is a command-line tool for 433 MHz radio controls compatible with the RPI. 
+Based on this, I developed a web interface for easy operation of micropython_remote. 
+The web interface allows the recording and transmitting of RC signals by the simple push of a button.
+
+
+I have placed the hardware setup in my living room and connected it to USB power supply.
+When WebRemote is connected to my home network, I can access it with my mobile phone and operate all of my RC power plugs in one place.
+The 433 MHz transmission is strong enough to reach all of my RC power plugs.
+The signal reaches at least through two walls and several doors.
+
 
 ## Description
 
-<img align="right"  src="doc/web_interface.png" width="150" height="auto" /> WebRemote can record the signals of different handheld 433 MHz transmitters and make them accessible via a simple web interface. This eliminates the need of multiple brand-specific remotes for similar 433 MHz devices in home automation. WebRemote can connect to the local WiFi which makes the web interface accessible for all devices (e. g. mobile phones, computers) in the local WiFi.
+WebRemote can record the signals of different 433 MHz transmitters and make them accessible via a web interface. 
+The signals can be captured, transmitted and managed using the web interface.
+A minimal hardware setup was used to make reproduction and customization of the programm easy.
+The hardware setup is comprised of a Raspberry Pi Pico W (RPI), a 433 MHz Transmitter (TX) and a 433 MHz Receiver (RX).
 
-WebRemote uses minimal hardware setup comprised of a Raspberry Pi Pico W (RPI), a 433 MHz Transmitter (TX) and a 433 MHz Receiver (RX).
+Since the RPI's network module supports accesa-point (AP) and station-mode (STA),
+the web interface can be accessed either directly via AP or through local WiFi
+when used in STA mode.
 
-The software is relies on Peter Hinch's [micropython_remote](https://github.com/peterhinch/micropython_remote) to operate the Transmitter and the Receiver.
-[Microdot](https://github.com/miguelgrinberg/microdot) is used to create a simple web server which provides the basis for the web interface.
-AJAX requests (using jQuery) are used to implement communication between the web interface and the web server.
+- AP mode: The RPI creates a WLan-network and devices can connect directly to it. This might be usefull for mobile use of the programm.
+- STA mode:  The RPI connects to a local WiFi (e. g. home wifi) and can be accessed
+by all devices connected to the same local WiFi. This is convenient for use in the home network.
+
+
+On the server side (micropython part), [Microdot](https://github.com/miguelgrinberg/microdot) and asyncio were used to create an asynchronous web-server.
+A slightly modified version of Peter Hinch's [micropython_remote](https://github.com/peterhinch/micropython_remote) to operate the Transmitter and the Receiver.
+
+On the client side, a simple web interface was created using HTML, (S)CSS and jQuery.
+All operations are controlled via AJAX requests initiated by jQuery.
+
+CSS was created with Dart SASS. To ensure cross-browser compatability, CSS was post-
+processed with autoprefixer and normalize.css was included in the web interface.
+CSS was minified during post-processing. JS was also minified during post-processing.
+Prepros was used to perform pre- and post-processing of CSS and JS.
 
 ## Setup
 
