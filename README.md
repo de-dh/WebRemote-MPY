@@ -42,47 +42,46 @@ when used in STA mode.
 by all devices connected to the same local WiFi. This is convenient for use in the home network.
 
 
-On the server side (micropython part), [Microdot](https://github.com/miguelgrinberg/microdot) and asyncio were used to create an asynchronous web-server.
-A slightly modified version of Peter Hinch's [micropython_remote](https://github.com/peterhinch/micropython_remote) to operate the Transmitter and the Receiver.
+On the server side (micropython part), [Microdot](https://github.com/miguelgrinberg/microdot) and asyncio are used to create an asynchronous web-server.
+A slightly modified version of Peter Hinch's [micropython_remote](https://github.com/peterhinch/micropython_remote) is used to operate the Transmitter and the Receiver.
 
-On the client side, a simple web interface was created using HTML, (S)CSS and jQuery.
+On the client side, a simple web interface was created using HTML, SASS, CSS and jQuery.
 All operations are controlled via AJAX requests initiated by jQuery.
 
 CSS was created with Dart SASS. To ensure cross-browser compatability, CSS was post-
-processed with autoprefixer and normalize.css was included in the web interface.
+processed with autoprefixer and [normalize.css](https://github.com/necolas/normalize.css) was included in the web interface.
 CSS was minified during post-processing. JS was also minified during post-processing.
-Prepros was used to perform pre- and post-processing of CSS and JS.
+[Prepros](https://prepros.io/) was used to perform pre- and post-processing of CSS and JS.
 
 ## Setup
 
-Components:
+### Components:
 - Raspberry Pi Pico W
 - Breadboard and wires
 - 433 MHz Transmitter (WL102-341) + Antenna
 - 433 MHz Receiver (RX470C-V01) + Antenna
 
-
 <img align="right"  src="doc/minimal_setup.jpg" width="200" height="auto" />
-The supplied antennas were soldered onto the Transmitter (short antenna) and Receiver (long antenna).
-A minimum setup consisting only of a RPI and a 433 MHz Transmitter and Receiver
-(detailed information provided below) was installed on a small breadboard.
 
-Wiring:
+
+### Wiring:
+The supplied antennas are soldered onto the Transmitter (short antenna) and Receiver (long antenna).
+
 - RX-Vcc, TX-Vcc: 3.3V (Pin 35)
 - RX-GND, TX-GND: RPI GND (e. g. Pin 38)
 - RX-DATA: RPI GPIO 16
 - TX-DATA: RPI GPIO 17
+- The Transmitters EN-Pin and the second Data-Pin of the Receiver remain unconnected.
+- Connect the RPI to the USB port of a computer
 
-RPI was connected to a computer via USB which provides the power supply.
-
-
+<img src="doc/circuit_diagramm.png" width="200" height="auto" />
 
 
 ## Installation
 
-1. MicroPython V 1.23.0 firmware is installed on the Raspberry Pi Pico W.
-2. The programm files in the /dist folder are copied onto the RPI using Thonny
-3. Open the main programm (main.py) and customize the WiFi settings provided as global constants / variables in the config section of the programm:
+1. Install *MicroPython V 1.23.0* firmware on the Raspberry Pi Pico W.
+2. Copy all files in the */dist* folder onto the RPI using Thonny.
+3. Open the main programm (main.py) on the RPI in Thonny and customize the WiFi settings provided as global constants / variables in the config section of the programm:
 ```python
 """Config"""
 WR_HEARTBEAT = True   #[True|False] Use onboard LED as heartbead
@@ -103,20 +102,36 @@ WR_AP_PASSWORD = 'micropython' #Password of the AP created in AP mode
 4. When WiFi connection was successfull the IP address of the web interface is printed in the console of Thonny.<img src="doc/shell_with_network_info.png" width="400" height="auto" /> 
    - **STA mode**: The web interface can be accessed via browser by every device connected to the same WiFi network as WebRemote using it's IP address as URL.
    - **AP mode**: The web interface can only be accessed by a device directly connected to the access point created by WebRemote. When a device has connected to the AP, the web interface can be accessed via browser using it's IP address as URL.
+   - The IP address seems to be the same after rebooting the programm. The setup can be used independently of a computer requiring only a power supply after the IP address was retrieved from the console on first run.
 
 ## Usage
-The recorded data is stored in a file in JSON format. The name of the 
-The data file must not be empty. 
+
+- **Data storage**: The recorded data is stored in a file in JSON format (the name of the file can be set in configuration section). 
+Two datasets are initially provided in the data file. 
+Those datasets represent the All-On and All-Off signals of my RC power plugs made by *benon*.
+**The data file must not be empty otherwise an error will occur.** 
+The initiall datasets can be deleted when new datasets are recorded.
+
+- **Capturing signals**: Enter a name in the web interface and press Capture. 
+Immediately aim your transmitter at the setup from close distance and press the key you desire.
+A promt will be displayed in the web interface indicating successfull capture or failure.
+
+
+- **Transmitting signals**: Press the Play button of the desired signal.
+A promt will be displayed in the web interface indicating successfull transmission or failure.
+
+
+- **Deleting signals**: Press the Delete button of the desired signal and confirm deletion in the promt.
 
 
 ## Mobile setup
 <img align="right" src="doc/mobile_setup.jpg" width="250" height="auto" />
 
-I use this setup at home since it does not require a computer for operation after initial configuration. 
+This setup allows switching between STA mode (which I use at home) and AP mode (for mobile use) using a toggle switch.
 When connected to USB power, all neccessary information are displayed on a display.
 
 I soldered the components listed in section *Setup* onto a circuit board and added some additional components.
-Most important, I added an **OLED display** which displays information on the network configuration.
+Most important, I added an **OLED display** which displays information regarding the network configuration.
 A **toggle switch** is used to select WiFi mode. It allows selection of either AP or STA mode.
 A **green LED** and a **red LED** were added to indicate active transmissions and transmission errors, respectively.
 A simple push-button acts as a **reset switch**.
